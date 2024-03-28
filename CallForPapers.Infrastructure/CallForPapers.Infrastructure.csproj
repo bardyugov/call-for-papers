@@ -3,16 +3,18 @@
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
-        <RootNamespace>CallForPappers.Infrastructure</RootNamespace>
+        <Nullable>disable</Nullable>
+        <RootNamespace>CallForPapers.Infrastructure</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="FluentValidation" Version="11.9.0" />
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.3" />
       <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.2" />
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\CallForPapers.Application\CallForPapers.Application.csproj" />
       <ProjectReference Include="..\CallForPapers.Domain\CallForPapers.Domain.csproj" />
     </ItemGroup>
 
