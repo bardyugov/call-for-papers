@@ -5,7 +5,7 @@ namespace CallForPapers.Infrastructure.Database;
 
 public class DatabaseContext : DbContext
 {
-    public DbSet<Application> Applications { get; set; }
+    public DbSet<Statement> Statements { get; set; }
 
     public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
     {
