@@ -27,30 +27,57 @@ public class StatementRepository : IStatementRepository
         return Result.Ok();
     }
 
-    public Task<Result<Statement>> Update(Guid id, Statement statement, CancellationToken token)
+    public async Task<Result> Update(Statement statement, CancellationToken token)
     {
-        throw new NotImplementedException();
+        var result = await FindById(statement.Id, token);
+        if (result.IsFailed)
+            return Result.Fail("");
+
+        _databaseContext.Statements.Update(result.Value);
+        return Result.Ok();
     }
 
     public async Task<Result<Statement>> FindById(Guid id, CancellationToken token)
     {
-        var statement = await _databaseContext.Statements.FirstOrDefaultAsync(v => v.Id == id, token);
+        var statement = await _databaseContext.Statements
+            .Include(v => v.Activity)
+            .FirstOrDefaultAsync(v => v.Id == id, token);
         if (statement is null)
             return Result.Fail("Not found statement");
 
         return Result.Ok(statement);
     }
 
-    public async Task<List<Statement>> FindByAuthorId(Guid author, CancellationToken token)
+    public Task<List<Statement>> FindByAuthorId(Guid author, CancellationToken token)
     {
-        return await _databaseContext.Statements.Where(v => v.Author == author).ToListAsync(token);
+        return _databaseContext.Statements.Where(v => v.Author == author).ToListAsync(token);
     }
 
-    public async Task<List<Statement>> FindByAuthorIdUnconfirmedStatements(Guid id, CancellationToken token)
+    public Task<List<Statement>> FindByAfterDate(DateTime time, CancellationToken token)
     {
-        return await _databaseContext.Statements
-            .Where(v => v.Id == id && v.Status == Status.Unconfirmed)
+        return _databaseContext.Statements
+            .Include(v => v.Activity)
+            .Where(v => v.SubmittedTime > time.ToUniversalTime())
             .ToListAsync(token);
+    }
+
+    public Task<List<Statement>> FindByByOlderDate(DateTime time, CancellationToken token)
+    {
+        return _databaseContext.Statements
+            .Include(v => v.Activity)
+            .Where(v => v.CreateDate < time.ToUniversalTime())
+            .ToListAsync(token);
+    }
+
+    public async Task<Result<Statement>> FindByAuthorIdUnconfirmedStatement(Guid id, CancellationToken token)
+    {
+        var result = await _databaseContext.Statements
+            .Include(v => v.Activity)
+            .FirstOrDefaultAsync(v => v.Author == id && v.Status == Status.Unconfirmed, token);
+        if (result is null)
+            return Result.Fail("Not found statement");
+
+        return Result.Ok(result);
     }
 
     public async Task SaveChanges(CancellationToken token)
