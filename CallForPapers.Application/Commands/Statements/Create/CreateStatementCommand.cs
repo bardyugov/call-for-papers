@@ -7,7 +7,7 @@ public class CreateStatementCommand : IRequest<Result<CreateStatementResult>>
 {
     public Guid Author { get; set; }
     
-    public string Type { get; set; }
+    public string Activity { get; set; }
     
     public string Name { get; set; }
     

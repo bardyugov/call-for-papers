@@ -1,5 +1,6 @@
 using CallForPapers.Application.Commands.Statements.Remove;
 using CallForPapers.Application.Repositories;
+using CallForPapers.Domain.Models;
 using FluentResults;
 using MediatR;
 
@@ -17,6 +18,9 @@ public class RemoveStatementHandler : IRequestHandler<RemoveStatementCommand, Re
         if (isFind.IsFailed)
             return Result.Fail(isFind.Errors.Last().Message);
 
+        if (isFind.Value.Status == Status.Confirmed)
+            return Result.Fail("You can't remove statemenet");
+        
         await _statementRepository.Remove(isFind.Value.Id, cancellationToken);
         await _statementRepository.SaveChanges(cancellationToken);
 

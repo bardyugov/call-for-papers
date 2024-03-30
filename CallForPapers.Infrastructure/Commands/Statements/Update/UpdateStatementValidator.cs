@@ -1,11 +1,11 @@
-using CallForPapers.Application.Commands.Statements.Create;
+using CallForPapers.Application.Commands.Statements.Update;
 using FluentValidation;
 
-namespace CallForPapers.Infrastructure.Commands.Statements.Create;
+namespace CallForPapers.Infrastructure.Commands.Statements.Update;
 
-public class CreateStatementValidator : AbstractValidator<CreateStatementCommand>
+public class UpdateStatementValidator : AbstractValidator<UpdateStatementData>
 {
-    public CreateStatementValidator()
+    public UpdateStatementValidator()
     {
         RuleFor(v => v.Name)
             .Length(3, 100);
@@ -17,14 +17,11 @@ public class CreateStatementValidator : AbstractValidator<CreateStatementCommand
         RuleFor(v => v.Outline)
             .Length(3, 1000);
 
-        RuleFor(v => v.Author)
-            .NotEmpty();
-
         RuleFor(v => v.Activity)
             .Must(ActivityValidator)
             .WithMessage("Not valid activity");
     }
-
+    
     private bool ActivityValidator(string value)
     {
         List<string> values = ["Report", "Masterclass", "Discussion"];

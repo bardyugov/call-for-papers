@@ -16,16 +16,13 @@ public class CreateStatementResult
     
     public string Outline { get; set; }
 
-    public static CreateStatementResult Create(Statement statement)
+    public CreateStatementResult (Statement statement)
     {
-        return new()
-        {
-            Id = statement.Id,
-            Author = statement.Author,
-            Activity = statement.Activity.ToString(),
-            Name = statement.Name,
-            Description = statement.Description,
-            Outline = statement.Outline
-        };
+        Id = statement.Id;
+        Author = statement.Author;
+        Activity = statement.Activity.Name;
+        Name = statement.Name;
+        Description = statement.Description;
+        Outline = statement.Outline;
     }
 }
