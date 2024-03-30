@@ -3,6 +3,7 @@ using System;
 using CallForPapers.Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CallForPapers.Infrastructure.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240330065542_UpdateStatement")]
+    partial class UpdateStatement
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,7 +52,7 @@ namespace CallForPapers.Infrastructure.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime?>("SubmittedTime")
+                    b.Property<DateTime>("SubmittedTime")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
@@ -78,19 +81,19 @@ namespace CallForPapers.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("903dc6e2-4bef-41b8-9138-4003f923cbb2"),
+                            Id = new Guid("1dc51594-8746-4bb9-ae4b-6f953a1e3411"),
                             Description = "Доклад, 35-45 минут",
                             Name = "Report"
                         },
                         new
                         {
-                            Id = new Guid("d0636f07-5e21-45ae-bdf8-eb5b9f37d031"),
+                            Id = new Guid("4f8d5a07-45cd-4e3d-ab0b-b8c6b286dfb3"),
                             Description = "Мастеркласс, 1-2 часа",
                             Name = "Masterclass"
                         },
                         new
                         {
-                            Id = new Guid("397c652e-9f66-4c02-85ef-140a6fd7d6dd"),
+                            Id = new Guid("ce2bc301-8ff0-4d9f-ab40-8e1428b6df2b"),
                             Description = "Дискуссия / круглый стол, 40-50 минут",
                             Name = "Discussion"
                         });
