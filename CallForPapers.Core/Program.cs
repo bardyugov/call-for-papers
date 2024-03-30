@@ -14,6 +14,7 @@ var assemblies = AppDomain.CurrentDomain.GetAssemblies();
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
 builder.Services.AddTransient<IStatementRepository, StatementRepository>();
+builder.Services.AddTransient<IStatementActivityRepository, StatementActivityRepository>();
 
 builder.Services.AddMediatR(x =>
     x.RegisterServicesFromAssemblies(assemblies));

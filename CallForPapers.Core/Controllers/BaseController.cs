@@ -12,4 +12,12 @@ public class BaseController : ControllerBase
 
         return Ok(result.Value);
     }
+    
+    protected IActionResult ConvertToActionResult(Result result) 
+    {
+        if (result.IsFailed)
+            return BadRequest(result.Reasons);
+
+        return Ok();
+    }
 }
