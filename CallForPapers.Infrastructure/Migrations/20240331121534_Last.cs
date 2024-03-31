@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace CallForPapers.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class MakeFieldsRequired : Migration
+    public partial class Last : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -20,17 +20,47 @@ namespace CallForPapers.Infrastructure.Migrations
             migrationBuilder.DeleteData(
                 table: "Activities",
                 keyColumn: "Id",
-                keyValue: new Guid("8837a157-afbd-40c2-8be7-0b35ee7855a1"));
+                keyValue: new Guid("220d3c44-4665-4643-801b-4d230d33145a"));
 
             migrationBuilder.DeleteData(
                 table: "Activities",
                 keyColumn: "Id",
-                keyValue: new Guid("d91a80c5-e0cc-448c-a8cc-bc297291bbaa"));
+                keyValue: new Guid("4bfa9f20-2dfb-46d0-8aee-1d802563400d"));
 
             migrationBuilder.DeleteData(
                 table: "Activities",
                 keyColumn: "Id",
-                keyValue: new Guid("f6858260-b1ff-4106-8ba0-daf8b80c3045"));
+                keyValue: new Guid("670ac606-82b7-4c24-b413-1883c570fc05"));
+
+            migrationBuilder.AlterColumn<string>(
+                name: "Outline",
+                table: "Statements",
+                type: "text",
+                nullable: false,
+                defaultValue: "",
+                oldClrType: typeof(string),
+                oldType: "text",
+                oldNullable: true);
+
+            migrationBuilder.AlterColumn<string>(
+                name: "Name",
+                table: "Statements",
+                type: "text",
+                nullable: false,
+                defaultValue: "",
+                oldClrType: typeof(string),
+                oldType: "text",
+                oldNullable: true);
+
+            migrationBuilder.AlterColumn<string>(
+                name: "Description",
+                table: "Statements",
+                type: "text",
+                nullable: false,
+                defaultValue: "",
+                oldClrType: typeof(string),
+                oldType: "text",
+                oldNullable: true);
 
             migrationBuilder.AlterColumn<Guid>(
                 name: "ActivityId",
@@ -47,9 +77,9 @@ namespace CallForPapers.Infrastructure.Migrations
                 columns: new[] { "Id", "Description", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("1c8afd3d-4e74-48c9-b08e-d5d5ab34ef1d"), "Мастеркласс, 1-2 часа", "Masterclass" },
-                    { new Guid("590b5753-1742-427b-8421-e3f73c33735e"), "Дискуссия / круглый стол, 40-50 минут", "Discussion" },
-                    { new Guid("cbf54db1-ea5c-4c25-bc6c-24c87f93a832"), "Доклад, 35-45 минут", "Report" }
+                    { new Guid("118e8afa-e4ca-409a-994e-ca34eb916df1"), "Дискуссия / круглый стол, 40-50 минут", "Discussion" },
+                    { new Guid("a1b0d873-952b-4d9d-8508-2b15e6a5f319"), "Мастеркласс, 1-2 часа", "Masterclass" },
+                    { new Guid("e1eed7e4-8883-4854-8ca8-145a9f5a7c82"), "Доклад, 35-45 минут", "Report" }
                 });
 
             migrationBuilder.AddForeignKey(
@@ -71,17 +101,41 @@ namespace CallForPapers.Infrastructure.Migrations
             migrationBuilder.DeleteData(
                 table: "Activities",
                 keyColumn: "Id",
-                keyValue: new Guid("1c8afd3d-4e74-48c9-b08e-d5d5ab34ef1d"));
+                keyValue: new Guid("118e8afa-e4ca-409a-994e-ca34eb916df1"));
 
             migrationBuilder.DeleteData(
                 table: "Activities",
                 keyColumn: "Id",
-                keyValue: new Guid("590b5753-1742-427b-8421-e3f73c33735e"));
+                keyValue: new Guid("a1b0d873-952b-4d9d-8508-2b15e6a5f319"));
 
             migrationBuilder.DeleteData(
                 table: "Activities",
                 keyColumn: "Id",
-                keyValue: new Guid("cbf54db1-ea5c-4c25-bc6c-24c87f93a832"));
+                keyValue: new Guid("e1eed7e4-8883-4854-8ca8-145a9f5a7c82"));
+
+            migrationBuilder.AlterColumn<string>(
+                name: "Outline",
+                table: "Statements",
+                type: "text",
+                nullable: true,
+                oldClrType: typeof(string),
+                oldType: "text");
+
+            migrationBuilder.AlterColumn<string>(
+                name: "Name",
+                table: "Statements",
+                type: "text",
+                nullable: true,
+                oldClrType: typeof(string),
+                oldType: "text");
+
+            migrationBuilder.AlterColumn<string>(
+                name: "Description",
+                table: "Statements",
+                type: "text",
+                nullable: true,
+                oldClrType: typeof(string),
+                oldType: "text");
 
             migrationBuilder.AlterColumn<Guid>(
                 name: "ActivityId",
@@ -96,9 +150,9 @@ namespace CallForPapers.Infrastructure.Migrations
                 columns: new[] { "Id", "Description", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("8837a157-afbd-40c2-8be7-0b35ee7855a1"), "Доклад, 35-45 минут", "Report" },
-                    { new Guid("d91a80c5-e0cc-448c-a8cc-bc297291bbaa"), "Мастеркласс, 1-2 часа", "Masterclass" },
-                    { new Guid("f6858260-b1ff-4106-8ba0-daf8b80c3045"), "Дискуссия / круглый стол, 40-50 минут", "Discussion" }
+                    { new Guid("220d3c44-4665-4643-801b-4d230d33145a"), "Дискуссия / круглый стол, 40-50 минут", "Discussion" },
+                    { new Guid("4bfa9f20-2dfb-46d0-8aee-1d802563400d"), "Доклад, 35-45 минут", "Report" },
+                    { new Guid("670ac606-82b7-4c24-b413-1883c570fc05"), "Мастеркласс, 1-2 часа", "Masterclass" }
                 });
 
             migrationBuilder.AddForeignKey(

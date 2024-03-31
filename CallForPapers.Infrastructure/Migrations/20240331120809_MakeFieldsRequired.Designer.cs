@@ -3,6 +3,7 @@ using System;
 using CallForPapers.Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CallForPapers.Infrastructure.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240331120809_MakeFieldsRequired")]
+    partial class MakeFieldsRequired
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -81,19 +84,19 @@ namespace CallForPapers.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("e1eed7e4-8883-4854-8ca8-145a9f5a7c82"),
+                            Id = new Guid("8e8186ef-2e65-45c9-8a6c-67bd6d4568c8"),
                             Description = "Доклад, 35-45 минут",
                             Name = "Report"
                         },
                         new
                         {
-                            Id = new Guid("a1b0d873-952b-4d9d-8508-2b15e6a5f319"),
+                            Id = new Guid("d6ba3e05-b767-4a49-a67e-b4e6f0633ded"),
                             Description = "Мастеркласс, 1-2 часа",
                             Name = "Masterclass"
                         },
                         new
                         {
-                            Id = new Guid("118e8afa-e4ca-409a-994e-ca34eb916df1"),
+                            Id = new Guid("d02ef514-0546-44b7-8627-81e1f809ecd5"),
                             Description = "Дискуссия / круглый стол, 40-50 минут",
                             Name = "Discussion"
                         });
