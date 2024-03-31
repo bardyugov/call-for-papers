@@ -15,9 +15,9 @@ public class GetStatementsByUnSubmittedOlderHandler
     
     public async Task<List<CreateStatementResult>> Handle(GetStatementsByUnSubmittedOlderQuery request, CancellationToken cancellationToken)
     {
-        var statements = await _statementRepository.FindByByOlderDate(request.Time, cancellationToken);
+        var statements = await _statementRepository.FindByStatus(Status.Unconfirmed, cancellationToken);
         var result = statements
-            .Where(v => v.Status == Status.Unconfirmed)
+            .Where(v => request.Time < v.CreateDate)
             .Select(v => new CreateStatementResult(v))
             .ToList();
 

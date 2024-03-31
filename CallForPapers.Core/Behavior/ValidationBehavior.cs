@@ -1,3 +1,4 @@
+using CallForPapers.Application.Commands.Statements.Update;
 using FluentValidation;
 using MediatR;
 
@@ -19,8 +20,13 @@ public class ValidationBehavior<TRequest, TResponse>
             .SelectMany(result => result.Errors)
             .Where(failure => failure != null)
             .ToList();
+
+        if (request is UpdateStatementCommand && failures.Count == 4)
+        {
+            throw new ValidationException(failures);
+        }
         
-        if (failures.Count != 0)
+        if (failures.Count != 0 && request is not UpdateStatementCommand)
         {
             throw new ValidationException(failures);
         }

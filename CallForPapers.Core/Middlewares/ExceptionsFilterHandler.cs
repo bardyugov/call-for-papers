@@ -1,8 +1,8 @@
-namespace CallForPapers.Core.Middlewares;
-
 using System.Net;
 using System.Text.Json;
 using FluentValidation;
+
+namespace CallForPapers.Core.Middlewares;
 
 public class ExceptionsFilterHandler
 {
@@ -38,7 +38,7 @@ public class ExceptionsFilterHandler
         context.Response.ContentType = "application/json";
         context.Response.StatusCode = (int)code;
             
-        if (result == null || result == "")
+        if (result == "")
         {
             result = JsonSerializer.Serialize(new { Error = exception.Message });
         }

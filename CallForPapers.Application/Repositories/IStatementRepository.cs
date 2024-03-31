@@ -13,10 +13,7 @@ public interface IStatementRepository : IBaseRepository
 
     Task<List<Statement>> FindByAuthorId(Guid author, CancellationToken token);
 
-    Task<List<Statement>> FindByAfterDate(DateTime time, CancellationToken token);
-
-    Task<List<Statement>> FindByByOlderDate(DateTime time, CancellationToken token);
-
+    Task<List<Statement>> FindByStatus(Status status, CancellationToken token);
     Task<Result> Update(Statement statement, CancellationToken token);
     
     Task<Result<Statement>> FindByAuthorIdUnconfirmedStatement(Guid id, CancellationToken token);

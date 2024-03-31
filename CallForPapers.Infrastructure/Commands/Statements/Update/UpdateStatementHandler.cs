@@ -29,17 +29,20 @@ public class UpdateStatementHandler : IRequestHandler<UpdateStatementCommand, Re
 
         if (resultStatement.Value.Status == Status.Confirmed)
             return Result.Fail("You can't change confirmed statement");
-
-        var activity = await _statementActivityRepository.FindByName(request.Data.Activity, cancellationToken);
-        if (activity.IsFailed)
-            return Result.Fail("Not found activity");
-
+        
         var statement = resultStatement.Value;
         
-        statement.Outline = request.Data.Outline;
-        statement.Description = request.Data.Description;
-        statement.Name = request.Data.Name;
-        statement.Activity = activity.Value;
+        if (request.Activity != null)
+        {
+            var findingActivity = await _statementActivityRepository.FindByName(request.Activity, cancellationToken);
+            if (findingActivity.IsFailed)
+                return Result.Fail("Not found activity");
+            statement.Activity = findingActivity.Value;
+        }
+
+        statement.Outline = request.Outline ?? statement.Outline;
+        statement.Description = request.Description ?? statement.Description;
+        statement.Name = request.Name ?? statement.Name;
         
         await _statementRepository.Update(statement, cancellationToken);
         await _statementRepository.SaveChanges(cancellationToken);

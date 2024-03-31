@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace CallForPapers.Domain.Models;
 
 public class Statement
@@ -6,12 +8,16 @@ public class Statement
     
     public Guid Author { get; set; }
     
+    [Required]
     public StatementActivity Activity { get; set; }
-
+    
+    [Required]
     public string Name { get; set; }
 
+    [Required]
     public string Description { get; set; }
 
+    [Required]
     public string Outline { get; set; }
     
     public DateTime CreateDate { get; set; }

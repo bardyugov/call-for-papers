@@ -1,4 +1,5 @@
 using CallForPapers.Application.Commands.Statements.Create;
+using CallForPapers.Infrastructure.Literals;
 using FluentValidation;
 
 namespace CallForPapers.Infrastructure.Commands.Statements.Create;
@@ -8,6 +9,7 @@ public class CreateStatementValidator : AbstractValidator<CreateStatementCommand
     public CreateStatementValidator()
     {
         RuleFor(v => v.Name)
+            .NotNull()
             .Length(3, 100);
 
         RuleFor(v => v.Description)
@@ -15,10 +17,12 @@ public class CreateStatementValidator : AbstractValidator<CreateStatementCommand
             .WithMessage("Not valid description");
 
         RuleFor(v => v.Outline)
+            .NotNull()
             .Length(3, 1000);
 
         RuleFor(v => v.Author)
-            .NotEmpty();
+            .NotNull()
+            .NotEqual(Guid.Empty);
 
         RuleFor(v => v.Activity)
             .Must(ActivityValidator)
@@ -27,8 +31,7 @@ public class CreateStatementValidator : AbstractValidator<CreateStatementCommand
 
     private bool ActivityValidator(string value)
     {
-        List<string> values = ["Report", "Masterclass", "Discussion"];
-        return values.Contains(value);
+        return Constants.ValidationActivities.Contains(value);
     }
 
     private bool DescriptionValidator(string value)

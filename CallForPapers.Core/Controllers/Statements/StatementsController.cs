@@ -39,9 +39,10 @@ public class StatementsController : BaseController
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> Update(UpdateStatementData command, Guid id, CancellationToken token)
+    public async Task<IActionResult> Update(UpdateStatementCommand command, Guid id, CancellationToken token)
     {
-        var result = await _mediator.Send(new UpdateStatementCommand(command, id), token);
+        command.SetId(id);
+        var result = await _mediator.Send(command, token);
         return ConvertToActionResult(result);
     }
 
@@ -52,7 +53,7 @@ public class StatementsController : BaseController
         return ConvertToActionResult(result);
     }
 
-    [HttpGet("SubmittedOlder")]
+    [HttpGet("SubmittedAfter")]
     public async Task<IActionResult> GetSubmittedAfter(
         [FromQuery(Name = "Time")] DateTime time,
         CancellationToken token)

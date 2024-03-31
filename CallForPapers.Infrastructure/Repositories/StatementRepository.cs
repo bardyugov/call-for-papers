@@ -53,19 +53,11 @@ public class StatementRepository : IStatementRepository
         return _databaseContext.Statements.Where(v => v.Author == author).ToListAsync(token);
     }
 
-    public Task<List<Statement>> FindByAfterDate(DateTime time, CancellationToken token)
+    public Task<List<Statement>> FindByStatus(Status status, CancellationToken token)
     {
         return _databaseContext.Statements
             .Include(v => v.Activity)
-            .Where(v => v.SubmittedTime > time.ToUniversalTime())
-            .ToListAsync(token);
-    }
-
-    public Task<List<Statement>> FindByByOlderDate(DateTime time, CancellationToken token)
-    {
-        return _databaseContext.Statements
-            .Include(v => v.Activity)
-            .Where(v => v.CreateDate < time.ToUniversalTime())
+            .Where(v => v.Status == status)
             .ToListAsync(token);
     }
 

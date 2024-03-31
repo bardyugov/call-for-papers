@@ -4,8 +4,10 @@ using MediatR;
 
 namespace CallForPapers.Application.Commands.Statements.Update;
 
-public class UpdateStatementData
+public class UpdateStatementCommand : IRequest<Result<CreateStatementResult>>
 {
+    public Guid Id { get; set; }
+    
     public string Activity { get; set; }
     
     public string Name { get; set; }
@@ -13,17 +15,7 @@ public class UpdateStatementData
     public string Description { get; set; }
     
     public string Outline { get; set; }
-}
 
-public class UpdateStatementCommand : IRequest<Result<CreateStatementResult>>
-{
-    public UpdateStatementData Data { get; set; }
-    
-    public Guid Id { get; set; }
+    public void SetId(Guid id) => Id = id;
 
-    public UpdateStatementCommand(UpdateStatementData data, Guid id)
-    {
-        Data = data;
-        Id = id;
-    }
 }  

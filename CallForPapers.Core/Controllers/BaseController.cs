@@ -16,7 +16,7 @@ public class BaseController : ControllerBase
     protected IActionResult ConvertToActionResult(Result result) 
     {
         if (result.IsFailed)
-            return BadRequest(result.Reasons);
+            throw new BadHttpRequestException(result.Errors.Last().Message);
 
         return Ok();
     }

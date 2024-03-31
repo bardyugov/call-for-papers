@@ -1,22 +1,25 @@
 using CallForPapers.Application.Commands.Statements.Update;
+using CallForPapers.Infrastructure.Literals;
 using FluentValidation;
 
 namespace CallForPapers.Infrastructure.Commands.Statements.Update;
 
-public class UpdateStatementValidator : AbstractValidator<UpdateStatementData>
+public class UpdateStatementValidator : AbstractValidator<UpdateStatementCommand>
 {
     public UpdateStatementValidator()
     {
         RuleFor(v => v.Name)
+            .NotNull()
             .Length(3, 100);
-
+        
         RuleFor(v => v.Description)
-            .Must(DescriptionValidator)
-            .WithMessage("Not valid description");
-
+            .NotNull()
+            .Length(3, 300);
+        
         RuleFor(v => v.Outline)
+            .NotNull()
             .Length(3, 1000);
-
+        
         RuleFor(v => v.Activity)
             .Must(ActivityValidator)
             .WithMessage("Not valid activity");
@@ -24,15 +27,7 @@ public class UpdateStatementValidator : AbstractValidator<UpdateStatementData>
     
     private bool ActivityValidator(string value)
     {
-        List<string> values = ["Report", "Masterclass", "Discussion"];
-        return values.Contains(value);
+        return Constants.ValidationActivities.Contains(value);
     }
 
-    private bool DescriptionValidator(string value)
-    {
-        if (value is null)
-            return true;
-
-        return value.Length > 2 && value.Length < 301;
-    }
 }

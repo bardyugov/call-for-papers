@@ -15,9 +15,9 @@ public class GetStatementsBySubmittedAfterHandler
     
     public async Task<List<CreateStatementResult>> Handle(GetStatementsBySubmittedAfterQuery request, CancellationToken cancellationToken)
     {
-        var statements = await _statementRepository.FindByAfterDate(request.Time, cancellationToken);
+        var statements = await _statementRepository.FindByStatus(Status.Confirmed, cancellationToken);
         var result = statements
-            .Where(v => v.Status == Status.Confirmed)
+            .Where(v => v.SubmittedTime > request.Time)
             .Select(v => new CreateStatementResult(v))
             .ToList();
 
