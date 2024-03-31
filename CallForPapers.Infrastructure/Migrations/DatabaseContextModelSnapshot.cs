@@ -81,19 +81,19 @@ namespace CallForPapers.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("e1eed7e4-8883-4854-8ca8-145a9f5a7c82"),
+                            Id = new Guid("eab9cfe4-c33b-4473-ad55-2d442a7dce62"),
                             Description = "Доклад, 35-45 минут",
                             Name = "Report"
                         },
                         new
                         {
-                            Id = new Guid("a1b0d873-952b-4d9d-8508-2b15e6a5f319"),
+                            Id = new Guid("171acffa-5c16-4638-ad9b-2ec44609c89b"),
                             Description = "Мастеркласс, 1-2 часа",
                             Name = "Masterclass"
                         },
                         new
                         {
-                            Id = new Guid("118e8afa-e4ca-409a-994e-ca34eb916df1"),
+                            Id = new Guid("534847c2-842a-4ffa-ae01-e40c01c430ad"),
                             Description = "Дискуссия / круглый стол, 40-50 минут",
                             Name = "Discussion"
                         });

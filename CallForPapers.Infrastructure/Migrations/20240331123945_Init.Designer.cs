@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CallForPapers.Infrastructure.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240331121416_RemoveAttr")]
-    partial class RemoveAttr
+    [Migration("20240331123945_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,7 +31,7 @@ namespace CallForPapers.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<Guid?>("ActivityId")
+                    b.Property<Guid>("ActivityId")
                         .HasColumnType("uuid");
 
                     b.Property<Guid>("Author")
@@ -41,12 +41,15 @@ namespace CallForPapers.Infrastructure.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Outline")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<int>("Status")
@@ -81,19 +84,19 @@ namespace CallForPapers.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("4bfa9f20-2dfb-46d0-8aee-1d802563400d"),
+                            Id = new Guid("eab9cfe4-c33b-4473-ad55-2d442a7dce62"),
                             Description = "Доклад, 35-45 минут",
                             Name = "Report"
                         },
                         new
                         {
-                            Id = new Guid("670ac606-82b7-4c24-b413-1883c570fc05"),
+                            Id = new Guid("171acffa-5c16-4638-ad9b-2ec44609c89b"),
                             Description = "Мастеркласс, 1-2 часа",
                             Name = "Masterclass"
                         },
                         new
                         {
-                            Id = new Guid("220d3c44-4665-4643-801b-4d230d33145a"),
+                            Id = new Guid("534847c2-842a-4ffa-ae01-e40c01c430ad"),
                             Description = "Дискуссия / круглый стол, 40-50 минут",
                             Name = "Discussion"
                         });
@@ -103,7 +106,9 @@ namespace CallForPapers.Infrastructure.Migrations
                 {
                     b.HasOne("CallForPapers.Domain.Models.StatementActivity", "Activity")
                         .WithMany("Statements")
-                        .HasForeignKey("ActivityId");
+                        .HasForeignKey("ActivityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Activity");
                 });
