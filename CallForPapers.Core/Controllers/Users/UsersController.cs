@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace CallForPapers.Core.Controllers.Users;
 
 [ApiController]
-[Route("Users")]
+[Route("users")]
 public class UsersController : BaseController
 {
     private readonly IMediator _mediator;

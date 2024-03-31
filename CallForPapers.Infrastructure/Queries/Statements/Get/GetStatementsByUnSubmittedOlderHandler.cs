@@ -17,11 +17,6 @@ public class GetStatementsByUnSubmittedOlderHandler
     {
         var statements = await _statementRepository.FindByStatus(Status.Unconfirmed, cancellationToken);
         var help = statements.Select(v => v.CreateDate);
-        Console.WriteLine(request.Time);
-        foreach (var a in help)
-        {
-            Console.WriteLine(a);
-        }
         var result = statements
             .Where(v => request.Time < v.CreateDate)
             .Select(v => new CreateStatementResult(v))

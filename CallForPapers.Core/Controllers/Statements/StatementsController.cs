@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace CallForPapers.Core.Controllers.Statements;
 
 [ApiController]
-[Route("Applications")]
+[Route("applications")]
 public class StatementsController : BaseController
 {
     private readonly IMediator _mediator;
@@ -53,7 +53,7 @@ public class StatementsController : BaseController
         return ConvertToActionResult(result);
     }
 
-    [HttpGet("SubmittedAfter")]
+    [HttpGet("submittedAfter")]
     public async Task<IActionResult> GetSubmittedAfter(
         [FromQuery(Name = "Time")] DateTime time,
         CancellationToken token)
@@ -62,7 +62,7 @@ public class StatementsController : BaseController
         return ConvertToActionResult(Result.Ok(result));
     }
     
-    [HttpGet("UnSubmittedOlder")] 
+    [HttpGet("unsubmittedOlder")] 
     public async Task<IActionResult> GetUnSubmitted(
         [FromQuery(Name = "Time")] DateTime time,
         CancellationToken token

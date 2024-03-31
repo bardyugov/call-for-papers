@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace CallForPapers.Core.Controllers.StatementActivities;
 
 [ApiController]
-[Route("/Activities")]
+[Route("/activities")]
 public class StatementActivitiesController : BaseController
 {
     private readonly IMediator _mediator;

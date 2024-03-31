@@ -17,9 +17,10 @@ public class DatabaseContext : DbContext
     {
         modelBuilder
             .Entity<StatementActivity>()
-            .HasData( new StatementActivity("Report", "Доклад, 35-45 минут"),
+            .HasData( 
+                new StatementActivity("Report", "Доклад, 35-45 минут"),
                 new StatementActivity("Masterclass", "Мастеркласс, 1-2 часа"),
                 new StatementActivity("Discussion", "Дискуссия / круглый стол, 40-50 минут")
-                );
+            );
     }
 }
