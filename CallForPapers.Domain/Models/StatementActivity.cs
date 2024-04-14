@@ -2,21 +2,18 @@ namespace CallForPapers.Domain.Models;
 
 public class StatementActivity
 {
-    public Guid Id { get; }
-
-    public string Name { get; }
-
-    public string Description { get; }
+    public Guid Id { get; set; }
     
-    public List<Statement> Statements { get; }
+    public string Name { get; set; }
+    
+    public string Description { get; set; }
+    
+    public List<Statement> Statements { get; set; }
 
-    public StatementActivity(Guid id, string name, string description, List<Statement> statements)
+    public StatementActivity(string name, string description)
     {
-        Id = id;
+        Id = Guid.NewGuid();
         Name = name;
         Description = description;
-        Statements = statements;
     }
-    
-    private StatementActivity(){}
 }
