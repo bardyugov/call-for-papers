@@ -9,17 +9,18 @@
 
     <ItemGroup>
       <PackageReference Include="FluentValidation" Version="11.9.0" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.3" />
-      <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.2" />
+      <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.9.0" />
+      <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.4" />
+      <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\CallForPapers.Application\CallForPapers.Application.csproj" />
-      <ProjectReference Include="..\CallForPapers.Domain\CallForPapers.Domain.csproj" />
+      <ProjectReference Include="..\CallForPapers.DAL\CallForPapers.DAL.csproj" />
+      <ProjectReference Include="..\CallForPapers.Migrations\CallForPapers.Migrations.csproj" />
     </ItemGroup>
 
     <ItemGroup>
         <Folder Include="Migrations/**" />
-        <Folder Include="Queries\Statements\" />
     </ItemGroup>
 </Project>

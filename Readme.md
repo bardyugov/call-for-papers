@@ -5,8 +5,8 @@
     cd Docker
     docker-compose up
     cd ..
-    dotnet ef database update --project CallForPapers.Infrastructure --startup-project CallForPapers.Core
-    cd CallForPapers.Core
+    dotnet ef database update --project CallForPapers.Migrations --startup-project CallForPapers.Api
+    cd CallForPapers.Api
     dotnet run
 
 # Swagger 
